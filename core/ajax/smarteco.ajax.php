@@ -21,9 +21,9 @@ try {
     include_file('core', 'authentification', 'php');
 
     if (!isConnect('admin')) {
-        throw new Exception(__('401 - Accès non autorisé', __FILE__));
+        throw new \Exception(__('401 - Accès non autorisé', __FILE__));
     }
-    
+
     ajax::init();
 
     // action qui permet d'obtenir l'ensemble des eqLogic
@@ -31,10 +31,10 @@ try {
         $eqLogics = eqLogic::byType('smarteco');
         // la liste des équipements
         foreach ($eqLogics as $eqLogic) {
-            $data['id'] = $eqLogic->getId();
-            $data['humanSidebar'] = $eqLogic->getHumanName(true, false);
+            $data['id']             = $eqLogic->getId();
+            $data['humanSidebar']   = $eqLogic->getHumanName(true, false);
             $data['humanContainer'] = $eqLogic->getHumanName(true, true);
-            $return[] = $data;
+            $return[]               = $data;
         }
         ajax::success($return);
     }
@@ -43,21 +43,19 @@ try {
         $params = init('params');
         ajax::success(smarteco::saveStack($params));
     }
-  
+
     if (init('action') == 'syncWithSmartEco') {
         smarteco::syncWithSmartEco();
         ajax::success();
     }
-    
+
     if (init('action') == 'refreshStatus') {
         smarteco::refresh_all();
         ajax::success();
     }
-    
 
-    throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
-    /*     * *********Catch exeption*************** */
-} catch (Exception $e) {
-    ajax::error(displayExeption($e), $e->getCode());
+    throw new \Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
+} catch (\Exception $e) {
+    ajax::error(displayException($e), $e->getCode());
 }
-?>
+ 

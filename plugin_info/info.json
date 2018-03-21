@@ -1,0 +1,12 @@
+{
+	"id" : "smarteco",
+	"name" : "Smart ECOcontrol",
+	"description" : "Plugin pour Smart Eco Control",
+	"licence" : "AGPL",
+	"author" : "greenski",
+	"require" : "3.0",
+	"category" : "wellness",
+	"hasDependency" : false,
+	"hasOwnDeamon" : false,
+	"maxDependancyInstallTime" : 0
+}
